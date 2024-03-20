@@ -1,0 +1,31 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+idt_asm.o: idt_asm.S idt.h x86_desc.h types.h
+paging_asm.o: paging_asm.S paging.h types.h x86_desc.h
+PIT_asm.o: PIT_asm.S
+systemcall_asm.o: systemcall_asm.S x86_desc.h types.h
+x86_desc.o: x86_desc.S x86_desc.h types.h
+filesystem.o: filesystem.c filesystem.h types.h multiboot.h lib.h \
+  systemcall.h rtc.h terminal.h
+i8259.o: i8259.c i8259.h types.h lib.h
+idt.o: idt.c multiboot.h types.h x86_desc.h lib.h i8259.h debug.h tests.h \
+  idt.h rtc.h keyboard.h systemcall.h filesystem.h terminal.h PIT.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h i8259.h debug.h \
+  tests.h idt.h paging.h rtc.h keyboard.h terminal.h systemcall.h \
+  filesystem.h PIT.h
+keyboard.o: keyboard.c keyboard.h types.h lib.h multiboot.h x86_desc.h \
+  i8259.h debug.h tests.h terminal.h systemcall.h filesystem.h rtc.h \
+  idt.h paging.h
+lib.o: lib.c lib.h types.h keyboard.h terminal.h systemcall.h \
+  filesystem.h multiboot.h rtc.h
+paging.o: paging.c paging.h types.h lib.h systemcall.h filesystem.h \
+  multiboot.h rtc.h terminal.h
+PIT.o: PIT.c PIT.h types.h lib.h i8259.h tests.h systemcall.h \
+  filesystem.h multiboot.h rtc.h terminal.h x86_desc.h paging.h
+rtc.o: rtc.c rtc.h types.h lib.h i8259.h tests.h
+systemcall.o: systemcall.c systemcall.h types.h filesystem.h multiboot.h \
+  rtc.h terminal.h paging.h x86_desc.h lib.h
+terminal.o: terminal.c terminal.h types.h systemcall.h filesystem.h \
+  multiboot.h rtc.h keyboard.h idt.h x86_desc.h lib.h i8259.h debug.h \
+  tests.h paging.h
+tests.o: tests.c tests.h x86_desc.h types.h lib.h paging.h rtc.h \
+  filesystem.h multiboot.h terminal.h systemcall.h
